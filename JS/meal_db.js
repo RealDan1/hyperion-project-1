@@ -9,4 +9,5 @@ fetch('https://www.themealdb.com/api/json/v1/1/filter.php?i=garlic_powder')
     let randomItemNumber = Math.floor(Math.random() * listOfMeals.meals.length);
     //log the .strMeal (name) of the meal
     console.log(listOfMeals.meals[randomItemNumber].strMeal);
+    //set this item as the order and then initiate the order
   });
