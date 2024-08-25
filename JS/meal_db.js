@@ -11,7 +11,7 @@ class Meal {
   }
 }
 //send get request to server for a meal
-fetch('https://www.themealdb.com/api/json/v1/1/filter.php?i=garlic_powder')
+fetch('https://www.themealdb.com/api/json/v1/1/filter.php?i=avocado')
   //parse the network response from JSON
   .then((res) => res.json())
 
@@ -30,4 +30,6 @@ fetch('https://www.themealdb.com/api/json/v1/1/filter.php?i=garlic_powder')
     order1.print();
 
     // sessionStorage.setItem("");
+
+    //WRITE A CASE FOR IF THE RETURNED OBJECT IS NULL INCASE WE TYPE IN THE WRONG NAME
   });
