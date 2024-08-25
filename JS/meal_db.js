@@ -6,6 +6,7 @@ class Meal {
     this.completionStatus = completionStatus;
   }
 
+  //DELETE THIS
   print() {
     console.log(`this meal is ${this.description}`);
   }
