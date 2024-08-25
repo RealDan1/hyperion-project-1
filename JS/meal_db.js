@@ -16,12 +16,12 @@ fetch('https://www.themealdb.com/api/json/v1/1/filter.php?i=garlic_powder')
   .then((res) => res.json())
 
   .then((listOfMeals) => {
-    //choose a random array item number(done on a separate line for readability)
+    //choose a random array item number(i.e. choose a random meal). Done on a separate line for readability.
     let randomItemNumber = Math.floor(Math.random() * listOfMeals.meals.length);
-    //log the .strMeal (name) of the meal
-    // console.log(listOfMeals.meals[randomItemNumber].strMeal);
+
     //set this item as the order and then initiate the order
 
+    //create a new Meal instance with the selected item and print it.
     let order1 = new Meal(
       listOfMeals.meals[randomItemNumber].strMeal,
       1,
