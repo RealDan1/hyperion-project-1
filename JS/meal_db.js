@@ -25,6 +25,7 @@ fetch('https://www.themealdb.com/api/json/v1/1/filter.php?i=avocado')
     let order = new Meal(listOfMeals.meals[randomItemNumber].strMeal, 1, false);
     order.print();
 
+    //SESSION STORAGE SECTION BUG: ITS NOW REFERENCING THE SAME MEAL BUT GENERATING NEW ONES UP TOP
     sessionStorage.setItem(
       `orderNumber${order.orderNumber}`,
       JSON.stringify(order)
