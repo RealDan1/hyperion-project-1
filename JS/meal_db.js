@@ -27,6 +27,9 @@ fetch('https://www.themealdb.com/api/json/v1/1/filter.php?i=avocado')
     order.print();
 
     //SESSION STORAGE SECTION BUG: ITS NOW REFERENCING THE SAME MEAL BUT GENERATING NEW ONES UP TOP
+    if (sessionStorage.getItem('orderNumber${order.orderNumber}')) {
+      //fill this
+    }
     sessionStorage.setItem(
       `orderNumber${order.orderNumber}`,
       JSON.stringify(order)
