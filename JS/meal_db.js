@@ -32,6 +32,8 @@ fetch('https://www.themealdb.com/api/json/v1/1/filter.php?i=avocado')
       JSON.stringify(order)
     );
 
+    //do if statement to check for stored item, THEN follow up
+
     let returnedMeal = JSON.parse(
       sessionStorage.getItem(`meal${order.orderNumber}`)
     );
