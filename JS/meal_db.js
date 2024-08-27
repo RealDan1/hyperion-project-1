@@ -28,12 +28,16 @@ fetch('https://www.themealdb.com/api/json/v1/1/filter.php?i=avocado')
 
     //SESSION STORAGE SECTION BUG: ITS NOW REFERENCING THE SAME MEAL BUT GENERATING NEW ONES UP TOP
     if (sessionStorage.getItem('orderNumber${order.orderNumber}')) {
-      //fill this
+      // DELETE fill this - soemthing like get it again?
+      let retrievedOrder = sessionStorage.getItem(
+        'orderNumber${order.orderNumber}'
+      );
+    } else {
+      sessionStorage.setItem(
+        `orderNumber${order.orderNumber}`,
+        JSON.stringify(order)
+      );
     }
-    sessionStorage.setItem(
-      `orderNumber${order.orderNumber}`,
-      JSON.stringify(order)
-    );
 
     //do if statement to check for stored item, THEN follow up
 
