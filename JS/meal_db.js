@@ -23,19 +23,13 @@ fetch('https://www.themealdb.com/api/json/v1/1/filter.php?i=beef')
     //set this item as the order and then initiate the order
     //=====================================================
 
-    let order = new Order(
-      listOfMeals.meals[randomItemNumber].strMeal,
-      1,
-      false
-    );
-
-    console.log(order);
-
     //create an allOrders array to store all orders - the length of this array will also be used to determine how many times the page has been refreshed which will be useful later.
     let allOrders = [];
 
     //create a new Order instance with the selected item and push it to the array.
-    allOrders.push(order);
+    allOrders.push(
+      new Order(listOfMeals.meals[randomItemNumber].strMeal, 1, false)
+    );
     console.log('this is just a test to show the array initialised:');
     console.log(allOrders);
 
@@ -43,6 +37,7 @@ fetch('https://www.themealdb.com/api/json/v1/1/filter.php?i=beef')
     //if the ordernumber exists in sessionstorage??(dno if this is correct since there is no way to reference order numbers yet) then we just need to retrieve it from storage.
 
     //refreshing the page will generate a new order number
+    //THIS IF STATEMENT IS NOW DEPRECATED BECAUSE WE ARE PUSHING TO AN ARRAY
     if (sessionStorage.getItem(`orderNumber${order.orderNumber}`)) {
       // DELETE fill this - soemthing like get it again?
       let retrievedOrder = sessionStorage.getItem(`allOrders`);
