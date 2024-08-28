@@ -12,7 +12,7 @@ class Order {
   }
 }
 //send get request to server for a meal
-fetch('https://www.themealdb.com/api/json/v1/1/filter.php?i=avocado')
+fetch('https://www.themealdb.com/api/json/v1/1/filter.php?i=beef')
   //parse the network response from JSON
   .then((res) => res.json())
 
@@ -23,13 +23,20 @@ fetch('https://www.themealdb.com/api/json/v1/1/filter.php?i=avocado')
     //set this item as the order and then initiate the order
     //=====================================================
 
+    let order = new Order(
+      listOfMeals.meals[randomItemNumber].strMeal,
+      1,
+      false
+    );
+
+    console.log(order);
+
     //create an allOrders array to store all orders - the length of this array will also be used to determine how many times the page has been refreshed which will be useful later.
     let allOrders = [];
 
     //create a new Order instance with the selected item and push it to the array.
-    allOrders.push(
-      new Order(listOfMeals.meals[randomItemNumber].strMeal, 1, false)
-    );
+    allOrders.push(order);
+    console.log('this is just a test to show the array initialised:');
     console.log(allOrders);
 
     //SESSION STORAGE SECTION BUG: ITS NOW REFERENCING THE SAME MEAL BUT GENERATING NEW ONES UP TOP
