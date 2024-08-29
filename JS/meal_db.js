@@ -37,15 +37,13 @@ fetch('https://www.themealdb.com/api/json/v1/1/filter.php?i=beef')
     //if the ordernumber exists in sessionstorage??(dno if this is correct since there is no way to reference order numbers yet) then we just need to retrieve it from storage.
 
     //refreshing the page will generate a new order number
-    //THIS IF STATEMENT IS NOW DEPRECATED BECAUSE WE ARE PUSHING TO AN ARRAY
-    //it will always create the array on the first load so maybe its not needed at all? how to check count
-    if (sessionStorage.getItem(`orderNumber${order.orderNumber}`)) {
+    //RETRIEVE allOrders before setting might cause a bug - but it will always set first
+    // if i understand this correctly - its gna push once to sessionSt and then never set again.
+    if (sessionStorage.getItem(`allOrders`)) {
       // DELETE fill this - soemthing like get it again?
       let retrievedOrder = sessionStorage.getItem(`allOrders`);
-      console.log(
-        'this is the retrieved orders now as an array of objects:\n' +
-          retrievedOrder
-      );
+      console.log('this is the retrieved orders, now as an array of objects:');
+      console.log(retrievedOrder);
     } else {
       //otherwise the order does not exist yet inside session storage so we need to save it into storage
       sessionStorage.setItem(`allOrders`, JSON.stringify(allOrders));
