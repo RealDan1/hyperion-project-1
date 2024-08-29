@@ -38,6 +38,7 @@ fetch('https://www.themealdb.com/api/json/v1/1/filter.php?i=beef')
 
     //refreshing the page will generate a new order number
     //THIS IF STATEMENT IS NOW DEPRECATED BECAUSE WE ARE PUSHING TO AN ARRAY
+    //it will always create the array on the first load so maybe its not needed at all? how to check count
     if (sessionStorage.getItem(`orderNumber${order.orderNumber}`)) {
       // DELETE fill this - soemthing like get it again?
       let retrievedOrder = sessionStorage.getItem(`allOrders`);
