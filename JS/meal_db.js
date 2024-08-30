@@ -34,7 +34,7 @@ fetch('https://www.themealdb.com/api/json/v1/1/filter.php?i=beef')
     console.log(allOrders);
 
     sessionStorage.setItem(`allOrders`, JSON.stringify(allOrders));
-    console.log("retrieved:")
+    console.log('retrieved:');
     console.log(JSON.parse(sessionStorage.getItem(`allOrders`)));
 
     //SESSION STORAGE SECTION BUG: ITS NOW REFERENCING THE SAME MEAL BUT GENERATING NEW ONES UP TOP
@@ -56,14 +56,13 @@ fetch('https://www.themealdb.com/api/json/v1/1/filter.php?i=beef')
     //     'this is still the old array, nothin exists yet only one object should be in here:\n' +
     //       allOrders
     //   );
-    }
-
-    //do if statement to check for stored item, THEN follow up
-
-    let returnedMeal = JSON.parse(
-      sessionStorage.getItem(`meal${order.orderNumber}`)
-    );
-    console.log(`this is the returned ${returnedMeal.description}`);
-
-    //WRITE A CASE FOR IF THE RETURNED OBJECT IS NULL INCASE WE TYPE IN THE WRONG NAME
   });
+
+//do if statement to check for stored item, THEN follow up
+
+// let returnedMeal = JSON.parse(
+//   sessionStorage.getItem(`meal${order.orderNumber}`)
+// );
+// console.log(`this is the returned ${returnedMeal.description}`);
+
+//WRITE A CASE FOR IF THE RETURNED OBJECT IS NULL INCASE WE TYPE IN THE WRONG NAME
