@@ -33,6 +33,8 @@ fetch('https://www.themealdb.com/api/json/v1/1/filter.php?i=beef')
     //set this item as the order and then initiate the order
     //=====================================================
 
+    // DELETE THIS: Comment all sections of code neatly from now on.
+
     //create an allOrders array to store all orders - the length of this array will also be used to determine how many times the page has been refreshed which will be useful later.
     let allOrders = [];
 
