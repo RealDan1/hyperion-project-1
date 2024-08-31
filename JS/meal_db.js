@@ -41,7 +41,7 @@ fetch('https://www.themealdb.com/api/json/v1/1/filter.php?i=beef')
       console.log(retrievedOrders);
       sessionStorage.setItem(`allOrders`, JSON.stringify(retrievedOrders));
     } else {
-      allorders.push(
+      allOrders.push(
         new Order(listOfMeals.meals[randomItemNumber].strMeal, 1, false)
       );
       sessionStorage.setItem(`allOrders`, JSON.stringify(allOrders));
