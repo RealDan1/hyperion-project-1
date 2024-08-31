@@ -22,63 +22,38 @@ fetch('https://www.themealdb.com/api/json/v1/1/filter.php?i=beef')
     //choose a random array item number(i.e. choose a random meal). Done on a separate line for readability.
     let randomItemNumber = Math.floor(Math.random() * listOfMeals.meals.length);
 
+    let mealForThisRound = new Order(
+      listOfMeals.meals[randomItemNumber].strMeal,
+      1,
+      false
+    );
+    console.log('meal for this round is:');
+    console.log(mealForThisRound.description);
+
     //set this item as the order and then initiate the order
     //=====================================================
 
     //create an allOrders array to store all orders - the length of this array will also be used to determine how many times the page has been refreshed which will be useful later.
-    let allOrders;
+    let allOrders = [];
 
     //create a new Order instance with the selected item and push it to the array.
 
     if (sessionStorage.getItem(`allOrders`)) {
       let retrievedOrders = JSON.parse(sessionStorage.getItem(`allOrders`));
-      retrievedOrders.push(
-        new Order(listOfMeals.meals[randomItemNumber].strMeal, 1, false)
-      );
+      retrievedOrders.push(mealForThisRound);
       console.log(
         'i just added an order to the previously existing array - this should accumulate something now'
       );
       console.log(retrievedOrders);
       sessionStorage.setItem(`allOrders`, JSON.stringify(retrievedOrders));
     } else {
-      allOrders.push(
-        new Order(listOfMeals.meals[randomItemNumber].strMeal, 1, false)
-      );
+      allOrders.push(mealForThisRound);
       sessionStorage.setItem(`allOrders`, JSON.stringify(allOrders));
+      console.log(
+        'i just added the new order to allorders array and then stored it for the first time in session storage. the array contains:'
+      );
+      console.log(allOrders);
     }
-
-    // console.log('this is just a test to show the array initialised:');
-    // console.log(allOrders);
-
-    // sessionStorage.setItem(`allOrders`, JSON.stringify(allOrders));
-    // console.log('retrieved:');
-    // console.log(JSON.parse(sessionStorage.getItem(`allOrders`)));
   });
-//SESSION STORAGE SECTION BUG: ITS NOW REFERENCING THE SAME MEAL BUT GENERATING NEW ONES UP TOP
-//if the ordernumber exists in sessionstorage??(dno if this is correct since there is no way to reference order numbers yet) then we just need to retrieve it from storage.
-
-//refreshing the page will generate a new order number
-//RETRIEVE allOrders before setting might cause a bug - but it will always set first
-// if i understand this correctly - its gna push once to sessionSt and then never set again.
-//then dont do an if?
-// if (sessionStorage.getItem(`allOrders`)) {
-//   // DELETE fill this - soemthing like get it again?
-//   let retrievedOrder = sessionStorage.getItem(`allOrders`);
-//   console.log('this is the retrieved orders, now as an array of objects:');
-//   console.log(retrievedOrder);
-// } else {
-//   //otherwise the order does not exist yet inside session storage so we need to save it into storage
-//   sessionStorage.setItem(`allOrders`, JSON.stringify(allOrders));
-//   console.log(
-//     'this is still the old array, nothin exists yet only one object should be in here:\n' +
-//       allOrders
-//   );
-
-//do if statement to check for stored item, THEN follow up
-
-// let returnedMeal = JSON.parse(
-//   sessionStorage.getItem(`meal${order.orderNumber}`)
-// );
-// console.log(`this is the returned ${returnedMeal.description}`);
 
 //WRITE A CASE FOR IF THE RETURNED OBJECT IS NULL INCASE WE TYPE IN THE WRONG NAME
