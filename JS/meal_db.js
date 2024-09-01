@@ -67,7 +67,7 @@ function setOrder(meal) {
     // POTENTIAL BUG - order number in array could be wrong it may be one too high
     let currentOrder = ssAllOrders.length + 1;
     // and then add it to the orderNumber value within the object.
-    ssAllOrders[ssAllOrders.length + 1].orderNumber = currentOrder;
+    ssAllOrders[ssAllOrders.length].orderNumber = currentOrder;
     // Console.log the order for testing
     console.log('Overwriting the array now, the new array is:');
     console.log(ssAllOrders);
