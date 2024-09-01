@@ -5,11 +5,6 @@ class Order {
     this.orderNumber = orderNumber;
     this.completionStatus = completionStatus;
   }
-
-  //DELETE THIS
-  print() {
-    console.log(`this meal is ${this.description}`);
-  }
 }
 
 let allorders;
