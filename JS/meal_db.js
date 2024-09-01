@@ -66,7 +66,7 @@ function setOrder(meal) {
     // POTENTIAL BUG - order number in array could be wrong it may be one too high
     ssAllOrders[ssAllOrders.length + 1].orderNumber = ssAllOrders.length + 1;
     // Console.log the order for testing
-    console.log('overwriting the array now, the new array is:');
+    console.log('Overwriting the array now, the new array is:');
     console.log(ssAllOrders);
     // overwrite the previous sessionstorage allOrders array with the latest array
     sessionStorage.setItem(`allOrders`, JSON.stringify(ssAllOrders));
@@ -75,11 +75,12 @@ function setOrder(meal) {
     let currentOrder = ssAllOrders.length + 1;
     sessionStorage.setItem(`currentOrder`, JSON.stringify(currentOrder));
   } else {
-    //else add the meal to the first place in the array and save the array to sessionStorage for the first time
+    // Else add the meal to the first place in the array:
     allOrders.push(meal);
+    // and save the array to sessionStorage for the first time:
     sessionStorage.setItem(`allOrders`, JSON.stringify(allOrders));
     console.log(
-      'i just added the new order to allOrders array and then stored it for the first time in session storage. the array contains:'
+      'Added the first new order to allOrders array and stored it for the first time. The array contains:'
     );
     console.log(allOrders);
   }
