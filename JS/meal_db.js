@@ -30,7 +30,7 @@ async function getMeal() {
       'https://www.themealdb.com/api/json/v1/1/filter.php?i=' + mainIngredient
     );
     // Parse the network response from JSON
-    let listOfMeals = apiResult.json();
+    let listOfMeals = await apiResult.json();
 
     // Choose a random array item number(i.e. choose a random meal). Done on a separate line for readability.
     let randomItemNumber = Math.floor(Math.random() * listOfMeals.meals.length);
@@ -49,9 +49,9 @@ async function getMeal() {
 }
 
 //DELETE BIG BOOMBA BUG - have to use async function for all subsequent functions somehow
-// Asynchronous Function to set an item as the order and then initiate the order
+// Create function to set an item as the order and then initiate the order
 // =====================================================
-async function setOrder(meal) {
+function setOrder(meal) {
   // Create an allOrders array to store all orders as an array of Meal objects.
   let allOrders = [];
 
@@ -94,10 +94,19 @@ async function setOrder(meal) {
 // Initiate the function chain
 // =====================================================
 // Call getMeal() to ask the user for an ingredient and return a chosen dish from the API
-getMeal()
-  //NOTE: getMeal() contains promises so has to be followed by .then
-  // Then use the returned meal and drop it into the setOrder function as an arg, setOrder will save the order to the array and then overwrite sessionStorage with the array (as well as set the current order number).
-  .then((meal) => setOrder(meal));
+async function main() {
+  try {
+    let meal = await getMeal();
+    setOrder(meal);
+  } catch (error) {
+    console.error(error);
+  }
+}
+
+main();
+
+//NOTE: getMeal() contains promises so has to be followed by .then
+// Then use the returned meal and drop it into the setOrder function as an arg, setOrder will save the order to the array and then overwrite sessionStorage with the array (as well as set the current order number).
 
 // Then display the current meals - next part of activity
 //.then();
