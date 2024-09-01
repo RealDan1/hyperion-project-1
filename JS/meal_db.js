@@ -1,4 +1,6 @@
-// Define Order class with properties for description, order number, and completion status - my task reviewer said I should start getting used to using classes and experiment with them:
+// Define Order class with properties for description, order number, and completion status
+// =====================================================
+// (My task reviewer said I should start getting used to using classes and experiment with them)
 class Order {
   constructor(description, orderNumber, completionStatus) {
     this.description = description;
@@ -9,7 +11,8 @@ class Order {
 
 // DELETE: PLACE ALL THIS INTO A FUNCTION, arg(mainIngredient) - returns meal for this round OR finishes the code up to adding to session storage. Perhaps we should make this a seperate function - this should run the core process of creating a new order and adding it. from there UI should dictate how we move the program around
 
-// create a function to send a get request to the server for a meal using user input(prompt) as the mainIngredient
+// Create a function to send a get request to the server for a meal using user input(prompt) as the mainIngredient
+// =====================================================
 function getMeal() {
   //DELETE - still need to make this mainIngredient only take LOWERCASE AND WITH UNDERSCORE IN SPACES
 
@@ -40,27 +43,28 @@ function getMeal() {
       //DELETE - log the meal to console for testing
       console.log('initiated API call to get meal, the meal is:');
       console.log(meal);
-      //return the newly created meal object for further processing
+      // Return the newly created meal object for further processing
       return meal;
     });
 }
 
+// Function to set an item as the order and then initiate the order
+// =====================================================
 function setOrder(meal) {
-  //function to set an item as the order and then initiate the order
-  //=====================================================
-
-  //create an allOrders array to store all orders - the length of this array will also be used to determine how many times the page has been refreshed which will be useful later.
+  // Create an allOrders array to store all orders as an array of Meal objects.
   let allOrders = [];
 
-  //create a new Order instance with the selected item and push it to the array.
+  // Create a new Order instance with the selected item and add it to sessionStorage
 
+  // if we already have orders in session storage: overwrite the existing one
   if (sessionStorage.getItem(`allOrders`)) {
+    // Use prefix "ss" to retrieve the allOrders array
     let ssAllOrders = JSON.parse(sessionStorage.getItem(`allOrders`));
-    ssAllOrders.push(mealForThisRound);
+    //add the meal to the retrieved array
+    ssAllOrders.push(meal);
+    //
     ssAllOrders[ssAllOrders.length + 1].orderNumber = ssAllOrders.length + 1;
-    console.log(
-      'i just added an order to the previously existing array - this should accumulate something now'
-    );
+    console.log('I am overwriting the array now, the new array is:');
     console.log(ssAllOrders);
     sessionStorage.setItem(`allOrders`, JSON.stringify(ssAllOrders));
   } else {
