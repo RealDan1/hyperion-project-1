@@ -13,44 +13,45 @@ class Order {
 
 // Create a function to send a get request to the API for a meal using prompt() as the mainIngredient
 // =====================================================
-function getMeal() {
+async function getMeal() {
   // DELETE - still need to make this mainIngredient only take LOWERCASE AND WITH UNDERSCORE IN SPACES
 
   // DELETE ALSO - write a case for if the returned API object is "null" in which case a seemingly valid name was entered but they dont have it in the DBase
 
-  let mainIngredient = prompt(
-    'please enter your (single) main ingredient of choice seperated by only spaces if its multiple words:'
-  );
-  fetch(
-    'https://www.themealdb.com/api/json/v1/1/filter.php?i=' + mainIngredient
-  )
+  //DELETE - HAVE TO REWRITE THE WHOLE THING USING ASYNC/AWAIT INSIDE EACH FUNCTION
+
+  try {
+    // prompt the user for a main ingredient
+    let mainIngredient = prompt(
+      'please enter your (single) main ingredient of choice seperated by only spaces if its multiple words:'
+    );
+    // Do the api call with the mainIngredient
+    let apiResult = await fetch(
+      'https://www.themealdb.com/api/json/v1/1/filter.php?i=' + mainIngredient
+    );
     // Parse the network response from JSON
-    .then((res) => res.json())
+    let listOfMeals = apiResult.json();
 
-    // Run main function code
-    .then((listOfMeals) => {
-      // Choose a random array item number(i.e. choose a random meal). Done on a separate line for readability.
-      let randomItemNumber = Math.floor(
-        Math.random() * listOfMeals.meals.length
-      );
+    // Choose a random array item number(i.e. choose a random meal). Done on a separate line for readability.
+    let randomItemNumber = Math.floor(Math.random() * listOfMeals.meals.length);
 
-      // Create the newly generated meal so we can use it later
-      let meal = new Order(
-        listOfMeals.meals[randomItemNumber].strMeal,
-        1,
-        false
-      );
-      //DELETE - log the meal to console for testing
-      console.log('initiated API call to get meal, the meal is:');
-      console.log(meal);
-      // Return the newly created meal object for further processing
-      return meal;
-    });
+    // Create the newly generated meal so we can use it later
+    let meal = new Order(listOfMeals.meals[randomItemNumber].strMeal, 1, false);
+    //DELETE - log the meal to console for testing
+    console.log('initiated API call to get meal, the meal is:');
+    console.log(meal);
+    // Return the newly created meal object for further processing
+    return meal;
+  } catch (error) {
+    //catch any error and log it
+    console.log(error);
+  }
 }
 
-// Function to set an item as the order and then initiate the order
+//DELETE BIG BOOMBA BUG - have to use async function for all subsequent functions somehow
+// Asynchronous Function to set an item as the order and then initiate the order
 // =====================================================
-function setOrder(meal) {
+async function setOrder(meal) {
   // Create an allOrders array to store all orders as an array of Meal objects.
   let allOrders = [];
 
@@ -82,6 +83,7 @@ function setOrder(meal) {
     allOrders.push(meal);
     // and save the array to sessionStorage for the first time:
     sessionStorage.setItem(`allOrders`, JSON.stringify(allOrders));
+    // Console.log the array for testing
     console.log(
       'Added the first new order to allOrders array and stored it for the first time. The array contains:'
     );
