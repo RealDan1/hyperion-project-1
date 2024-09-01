@@ -56,18 +56,26 @@ function setOrder(meal) {
 
   // Create a new Order instance with the selected item and add it to sessionStorage
 
-  // if we already have orders in session storage: overwrite the existing one
+  // If we already have orders in session storage: overwrite the existing one
   if (sessionStorage.getItem(`allOrders`)) {
-    // Use prefix "ss" to retrieve the allOrders array
+    // retrieve the allOrders array (Use prefix "ss" and save the retrieved data as a new variable)
     let ssAllOrders = JSON.parse(sessionStorage.getItem(`allOrders`));
-    //add the meal to the retrieved array
+    // Add the meal to the retrieved array
     ssAllOrders.push(meal);
-    //
+    // Create a unique order number and add it to the orderNumber value within the object. The number will be generated from the length of the ssAllOrders array +1
+    // POTENTIAL BUG - order number in array could be wrong it may be one too high
     ssAllOrders[ssAllOrders.length + 1].orderNumber = ssAllOrders.length + 1;
-    console.log('I am overwriting the array now, the new array is:');
+    // Console.log the order for testing
+    console.log('overwriting the array now, the new array is:');
     console.log(ssAllOrders);
+    // overwrite the previous sessionstorage allOrders array with the latest array
     sessionStorage.setItem(`allOrders`, JSON.stringify(ssAllOrders));
+    //set the last ordernumber as the latest order in session storage (overwrite any previous value)
+    //POTENTIAL BUG: orderNumber in sessionStorage could be the wrong number
+    let currentOrder = ssAllOrders.length + 1;
+    sessionStorage.setItem(`currentOrder`, JSON.stringify(currentOrder));
   } else {
+    //else add the meal to the first place in the array and save the array to sessionStorage for the first time
     allOrders.push(meal);
     sessionStorage.setItem(`allOrders`, JSON.stringify(allOrders));
     console.log(
