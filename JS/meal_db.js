@@ -18,8 +18,6 @@ async function getMeal() {
 
   // DELETE ALSO - write a case for if the returned API object is "null" in which case a seemingly valid name was entered but they dont have it in the DBase
 
-  //DELETE - HAVE TO REWRITE THE WHOLE THING USING ASYNC/AWAIT INSIDE EACH FUNCTION
-
   try {
     // prompt the user for a main ingredient
     let mainIngredient = prompt(
@@ -48,7 +46,6 @@ async function getMeal() {
   }
 }
 
-//DELETE BIG BOOMBA BUG - have to use async function for all subsequent functions somehow
 // Create function to set an item as the order and then initiate the order
 // =====================================================
 function setOrder(meal) {
@@ -92,23 +89,22 @@ function setOrder(meal) {
   }
 }
 
-// Initiate the function chain
+// Write the main function chain
 // =====================================================
-// Call getMeal() to ask the user for an ingredient and return a chosen dish from the API
+//async function to wait for getMeal();
 async function main() {
   try {
+    // Call getMeal() to ask the user for an ingredient and return a chosen dish from the API
     let meal = await getMeal();
     setOrder(meal);
+    // Then display the current meals - next part of activity
+    //.then();
+    //DELETE - PERHAPS THINK OF RECURSION HERE - after this last function is called, place the entire main function chain INSIDE another function, then call that function after the chain has been run. endless user loop
   } catch (error) {
     console.error(error);
   }
 }
 
+// Initiate the function chain
+// =====================================================
 main();
-
-//NOTE: getMeal() contains promises so has to be followed by .then
-// Then use the returned meal and drop it into the setOrder function as an arg, setOrder will save the order to the array and then overwrite sessionStorage with the array (as well as set the current order number).
-
-// Then display the current meals - next part of activity
-//.then();
-//DELETE - PERHAPS THINK OF RECURSION HERE - after this last function is called, place the entire main function chain INSIDE another function, then call that function after the chain has been run. endless user loop
