@@ -36,10 +36,9 @@ async function getMeal() {
     // Parse the network response from JSON
     let listOfMeals = await apiResult.json();
     //if the result from the api is null - the ingredient doesnt exist
-    console.log(listOfMeals.meals);
     if (listOfMeals.meals === null) {
       alert(
-        'the ingredient does not seem to exist on the server - please try again with a valid ingredient'
+        'The ingredient does not seem to exist on the server - please try again with a valid ingredient'
       );
       //use recursion to start the whole process again (call the main() function chain in this case - not this(getMeal()) function since that will lead to a dead end in the UI flow)
       main();
@@ -100,6 +99,7 @@ function setOrder(meal) {
     //console.log currentOrderBumber
   } else {
     // Else add the meal to the first place in the array:
+
     allOrders.push(meal);
     // and save the array to sessionStorage for the first time:
     sessionStorage.setItem(`allOrders`, JSON.stringify(allOrders));
