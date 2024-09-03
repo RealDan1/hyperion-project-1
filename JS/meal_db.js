@@ -23,10 +23,21 @@ async function getMeal() {
     let mainIngredient = prompt(
       'please enter your (single) main ingredient of choice seperated by only spaces if its multiple words:'
     );
-    // Do the api call with the mainIngredient
+
+    //lowercase the answer
+    mainIngredient = mainIngredient.toLowerCase();
+    //replace spaces with underscores
+    mainIngredient = mainIngredient.replace(/ /g, '_');
+    // Do the api call with the resulting string
     let apiResult = await fetch(
       'https://www.themealdb.com/api/json/v1/1/filter.php?i=' + mainIngredient
     );
+    //
+    if (apiResult === null) {
+      alert(
+        'the ingredient does not seem to exist on the server - please try again with a valid ingredient'
+      );
+    }
     // Parse the network response from JSON
     let listOfMeals = await apiResult.json();
 
