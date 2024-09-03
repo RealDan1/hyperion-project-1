@@ -111,6 +111,8 @@ function setOrder(meal) {
   }
 }
 
+// STILL: write the mark meal as complete or incomplete function
+
 // Write the main function chain
 // =====================================================
 //async function to wait for getMeal();
