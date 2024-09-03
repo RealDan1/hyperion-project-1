@@ -24,19 +24,22 @@ async function getMeal() {
       'please enter your (single) main ingredient of choice seperated by only spaces if its multiple words:'
     );
 
-    //lowercase the answer
+    // Lowercase the answer
     mainIngredient = mainIngredient.toLowerCase();
-    //replace spaces with underscores
+    // Replace spaces with underscores
     mainIngredient = mainIngredient.replace(/ /g, '_');
     // Do the api call with the resulting string
     let apiResult = await fetch(
       'https://www.themealdb.com/api/json/v1/1/filter.php?i=' + mainIngredient
     );
-    //
+    //if the result from the api is null - the ingredient doesnt exist
+    //POSSIBLE BUG - API returns a null but its nested somewhere
     if (apiResult === null) {
       alert(
         'the ingredient does not seem to exist on the server - please try again with a valid ingredient'
       );
+      //use recursion to start the process again (call the main() function chain in this case - not this(getMeal()) function since that will lead to a dead end in the UI flow)
+      main();
     }
     // Parse the network response from JSON
     let listOfMeals = await apiResult.json();
