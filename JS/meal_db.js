@@ -32,31 +32,39 @@ async function getMeal() {
     let apiResult = await fetch(
       'https://www.themealdb.com/api/json/v1/1/filter.php?i=' + mainIngredient
     );
+
+    // Parse the network response from JSON
+    let listOfMeals = await apiResult.json();
     //if the result from the api is null - the ingredient doesnt exist
-    //POSSIBLE BUG - API returns a null but its nested somewhere
-    if (apiResult === null) {
+    console.log(listOfMeals.meals);
+    if (listOfMeals.meals === null) {
       alert(
         'the ingredient does not seem to exist on the server - please try again with a valid ingredient'
       );
-      //use recursion to start the process again (call the main() function chain in this case - not this(getMeal()) function since that will lead to a dead end in the UI flow)
+      //use recursion to start the whole process again (call the main() function chain in this case - not this(getMeal()) function since that will lead to a dead end in the UI flow)
       main();
+    } else {
+      // else continue adding the meal to orders
+      // Choose a random array item number(i.e. choose a random meal). Done on a separate line for readability.
+      let randomItemNumber = Math.floor(
+        Math.random() * listOfMeals.meals.length
+      );
+
+      // Create the newly generated meal so we can use it later
+      let meal = new Order(
+        listOfMeals.meals[randomItemNumber].strMeal,
+        1,
+        false
+      );
+      //DELETE - log the meal to console for testing
+      console.log('initiated API call to get meal, the meal is:');
+      console.log(meal);
+      // Return the newly created meal object for further processing
+      return meal;
     }
-    // Parse the network response from JSON
-    let listOfMeals = await apiResult.json();
-
-    // Choose a random array item number(i.e. choose a random meal). Done on a separate line for readability.
-    let randomItemNumber = Math.floor(Math.random() * listOfMeals.meals.length);
-
-    // Create the newly generated meal so we can use it later
-    let meal = new Order(listOfMeals.meals[randomItemNumber].strMeal, 1, false);
-    //DELETE - log the meal to console for testing
-    console.log('initiated API call to get meal, the meal is:');
-    console.log(meal);
-    // Return the newly created meal object for further processing
-    return meal;
   } catch (error) {
     //catch any error and log it
-    console.log(error);
+    console.error(error);
   }
 }
 
