@@ -9,8 +9,6 @@ class Order {
   }
 }
 
-// DELETE: PLACE ALL THIS INTO A FUNCTION, arg(mainIngredient) - returns meal for this round OR finishes the code up to adding to session storage. Perhaps we should make this a seperate function - this should run the core process of creating a new order and adding it. from there UI should dictate how we move the program around
-
 // Create a function to send a get request to the API for a meal using prompt() as the mainIngredient
 // =====================================================
 async function getMeal() {
@@ -18,13 +16,15 @@ async function getMeal() {
 
   // DELETE ALSO - write a case for if the returned API object is "null" in which case a seemingly valid name was entered but they dont have it in the DBase
 
+  //DELETE STORE THE LAST ORDER NUMBER
+
   try {
     // prompt the user for a main ingredient
     let mainIngredient = prompt(
       'please enter your (single) main ingredient of choice seperated by only spaces if its multiple words:'
     );
 
-    // Lowercase the answer
+    // Lowercase the returned string
     mainIngredient = mainIngredient.toLowerCase();
     // Replace spaces with underscores
     mainIngredient = mainIngredient.replace(/ /g, '_');
@@ -43,7 +43,7 @@ async function getMeal() {
       //use recursion to start the whole process again (call the main() function chain in this case - not this(getMeal()) function since that will lead to a dead end in the UI flow)
       main();
     } else {
-      // else continue adding the meal to orders
+      // Else continue adding the meal to orders
       // Choose a random array item number(i.e. choose a random meal). Done on a separate line for readability.
       let randomItemNumber = Math.floor(
         Math.random() * listOfMeals.meals.length
@@ -130,3 +130,5 @@ async function main() {
 // Initiate the function chain
 // =====================================================
 main();
+
+//BUG: function still stores null as order item into array
