@@ -112,6 +112,12 @@ function setOrder(meal) {
 }
 
 // STILL: write the mark meal as complete or incomplete function
+//display the meals: in a prompt
+function completeMeals() {
+  let mealToComplete =
+    prompt(`please choose a meal number to mark as complete, the meals in storage are as follows:
+    ${allOrders}`);
+}
 
 // Write the main function chain
 // =====================================================
