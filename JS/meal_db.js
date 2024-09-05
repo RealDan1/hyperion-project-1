@@ -40,7 +40,7 @@ async function getMeal() {
       alert(
         'The ingredient does not seem to exist on the server - please try again with a valid ingredient'
       );
-      //use recursion to start the whole process again (call the main() function chain in this case - not this(getMeal()) function since that will lead to a dead end in the UI flow)
+      //RECURSION: use recursion to start the whole process again (call the main() function chain in this case - not this(getMeal()) function since that will lead to a dead end in the UI flow)
       main();
     } else {
       // Else continue adding the meal to orders
@@ -128,15 +128,28 @@ function completeMeals() {
     'please choose an order number to mark as complete, or alternatively enter zero to not mark anything complete. The currently incomplete orders are:\n' +
       displayIncompleteOrders
   );
-  if(orderToComplete=== 0){
-    alert("you ")
-
+  //if the user chooses to not complete an order: give the choice of either redisplaying incomplete orders OR starting the program again
+  if (orderToComplete === 0) {
+    let decision = prompt(
+      'You chose to not mark anything as complete, enter 1 if you would like to add a new order or 2 to see the list of incomplete orders again'
+    );
+    if (answer === 1) {
+      //RECURSION: call the main function and start the entire program from scratch (with the current items still in storage)
+      main();
+    } else if (answer === 2) {
+      //RECURSION: call the completeMeals() function again, to just display incomplete meals
+      completeMeals();
+    } else {
+      //error check the answer - the user didnt enter correctly - start again
+      alert('you didnt enter 1 or 2 please refresh the page and try again');
+    }
   } else {
-    //select the orderArrayItem and mark it as true(complete)
-    ssAllOrders[orderToComplete-1] = 
+    //if the user chose to mark an order as complete:
+    //select the orderArrayItem and mark it as complete(true)
+    ssAllOrders[orderToComplete - 1].completionStatus = true;
+    //DELETE: display the new array of objects in console for testing
   }
-  //mark the chosen order as complete
-  
+
   console.log('the order you want to complete is now:');
   console.log(orderToComplete);
 }
