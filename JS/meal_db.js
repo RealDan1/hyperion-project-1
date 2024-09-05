@@ -156,7 +156,7 @@ function completeMeals() {
 
 // Write the main function chain
 // =====================================================
-//async function to wait for getMeal();
+//async function to wait for the API return;
 async function main() {
   try {
     // Call getMeal() to ask the user for an ingredient and return a chosen dish from the API
@@ -164,7 +164,13 @@ async function main() {
     setOrder(meal);
     // Then display the current meals - next part of activity
     completeMeals();
-    //DELETE - PERHAPS THINK OF RECURSION HERE - after this last function is called, place the entire main function chain INSIDE another function, then call that function after the chain has been run. endless user loop
+    //tell the user the program will now restart
+    alert(
+      'you have successfully run the program, the program will now restart for the next order'
+    );
+    //RECURSION: start the program over again (call the main() function) - and choose a new order
+    //(saves the user the trouble of having to press refresh to start the process again)
+    main();
   } catch (error) {
     console.error(error);
   }
