@@ -117,20 +117,28 @@ function completeMeals() {
   let ssAllOrders = JSON.parse(sessionStorage.getItem('allOrders'));
   //filter the incomplete orders only and add them to a new array
   let incompleteOrders = ssAllOrders.filter((order) => !order.completionStatus);
-  //create a string of each element and add each string to a new array
+  //to display the orders: create a string of each element and add each string to a new array (with .map())
   let displayIncompleteOrders = incompleteOrders.map(
-    (order) => `Order no: ${order.orderNumber}, Name: ${order.description}`
+    (order) => `Order no: ${order.orderNumber} - Name: ${order.description}`
   );
   //join the array into a single string with each array item on a new line
   displayIncompleteOrders = displayIncompleteOrders.join('\n');
-
-  console.log(displayIncompleteOrders);
-  let mealToComplete = prompt(
-    'please choose a meal number to mark as complete, the currently incomplete meals are as follows:\n' +
+  //ask user to choose an incomplete order to mark as complete
+  let orderToComplete = prompt(
+    'please choose an order number to mark as complete, or alternatively enter zero to not mark anything complete. The currently incomplete orders are:\n' +
       displayIncompleteOrders
   );
-  console.log('the meal you want to complete is now:');
-  console.log(mealToComplete);
+  if(orderToComplete=== 0){
+    alert("you ")
+
+  } else {
+    //select the orderArrayItem and mark it as true(complete)
+    ssAllOrders[orderToComplete-1] = 
+  }
+  //mark the chosen order as complete
+  
+  console.log('the order you want to complete is now:');
+  console.log(orderToComplete);
 }
 
 // Write the main function chain
