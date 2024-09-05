@@ -133,7 +133,7 @@ async function main() {
     let meal = await getMeal();
     setOrder(meal);
     // Then display the current meals - next part of activity
-    //.then();
+    completeMeals();
     //DELETE - PERHAPS THINK OF RECURSION HERE - after this last function is called, place the entire main function chain INSIDE another function, then call that function after the chain has been run. endless user loop
   } catch (error) {
     console.error(error);
