@@ -111,15 +111,24 @@ function setOrder(meal) {
   }
 }
 
-// STILL: write the mark meal as complete or incomplete function
-//display the meals: in a prompt
+// Create the confirm meal as complete or incomplete function
 function completeMeals() {
   //pull the sessionStorage array of all orders - prefix is ss
   let ssAllOrders = JSON.parse(sessionStorage.getItem('allOrders'));
-  ssAllOrders = ssAllOrders.filter((order) => !order.completionStatus);
-  let mealToComplete =
-    prompt(`please choose a meal number to mark as complete, the currently incomplete meals are as follows:
-    ${ssAllOrders}`);
+  //filter the incomplete orders only and add them to a new array
+  let incompleteOrders = ssAllOrders.filter((order) => !order.completionStatus);
+  //create a string of each element and add each string to a new array
+  let displayIncompleteOrders = incompleteOrders.map(
+    (order) => `Order no: ${order.orderNumber}, Name: ${order.description}`
+  );
+  //join the array into a single string with each array item on a new line
+  displayIncompleteOrders = displayIncompleteOrders.join('\n');
+
+  console.log(displayIncompleteOrders);
+  let mealToComplete = prompt(
+    'please choose a meal number to mark as complete, the currently incomplete meals are as follows:\n' +
+      displayIncompleteOrders
+  );
   console.log('the meal you want to complete is now:');
   console.log(mealToComplete);
 }
@@ -140,7 +149,7 @@ async function main() {
   }
 }
 
-// Initiate the function chain
+// Initiate the main function chain
 // =====================================================
 main();
 
