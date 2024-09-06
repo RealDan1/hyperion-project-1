@@ -14,6 +14,8 @@ class Order {
 async function getMeal() {
   //DELETE STORE THE LAST ORDER NUMBER
 
+  //write a case for if the order number doesnt exist and the user wants to mark a non existing order as complete
+
   try {
     // prompt the user for a main ingredient
     let mainIngredient = prompt(
