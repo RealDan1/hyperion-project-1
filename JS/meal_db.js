@@ -88,7 +88,9 @@ function setOrder(meal) {
 
     ssAllOrders[ssAllOrders.length - 1].orderNumber = currentOrder;
     // Console.log the order for testing
-    console.log('Overwriting the array now, the new array is:');
+    console.log(
+      'Overwriting the array now with a NEWLY ADDED item, the new array is:'
+    );
     console.log(ssAllOrders);
     // overwrite the previous sessionstorage allOrders array with the latest array
     sessionStorage.setItem(`allOrders`, JSON.stringify(ssAllOrders));
@@ -124,10 +126,15 @@ function completeMeals() {
   //join the array into a single string with each array item on a new line
   displayIncompleteOrders = displayIncompleteOrders.join('\n');
   //ask user to choose an incomplete order to mark as complete
-  let orderToComplete = prompt(
-    'please choose an order number to mark as complete, or alternatively enter zero to not mark anything complete. The currently incomplete orders are:\n' +
-      displayIncompleteOrders
+  let orderToComplete = Number(
+    prompt(
+      'please choose an order number to mark as complete, or alternatively enter zero to not mark anything complete. The currently incomplete orders are:\n' +
+        displayIncompleteOrders
+    )
   );
+  //DELETE console.log the answer for testing
+  console.log('the order you want to complete is now:');
+  console.log(orderToComplete);
   //if the user chooses to not complete an order: give the choice of either redisplaying incomplete orders OR starting the program again
   if (orderToComplete === 0) {
     let decision = prompt(
@@ -148,10 +155,13 @@ function completeMeals() {
     //select the orderArrayItem and mark it as complete(true)
     ssAllOrders[orderToComplete - 1].completionStatus = true;
     //DELETE: display the new array of objects in console for testing
+    console.log(
+      'Overwriting the array now with a MODIFIED COMPLETIONSTATUS item, the new array is:'
+    );
+    console.log(JSON.stringify(ssAllOrders));
+    //store the modified ssAllOrders array in sessionStorage
+    sessionStorage.setItem(`allOrders`, JSON.stringify(ssAllOrders));
   }
-
-  console.log('the order you want to complete is now:');
-  console.log(orderToComplete);
 }
 
 // Write the main function chain
