@@ -12,12 +12,6 @@ class Order {
 // Create a function to send a get request to the API for a meal using prompt() as the mainIngredient
 // =====================================================
 async function getMeal() {
-  // DELETE - still need to make this mainIngredient only take LOWERCASE AND WITH UNDERSCORE IN SPACES
-
-  // DELETE ALSO - write a case for if the returned API object is "null" in which case a seemingly valid name was entered but they dont have it in the DBase
-
-  //DELETE add if null statement for all prompt boxes, return null for function and then return null for main function
-
   //DELETE STORE THE LAST ORDER NUMBER
 
   try {
@@ -84,10 +78,8 @@ function setOrder(meal) {
     // Add the meal to the retrieved array
     ssAllOrders.push(meal);
     // Create a unique order number: The number will be generated from the length of the ssAllOrders array +1
-    // POTENTIAL BUG - order number in array could be wrong it may be one too high
     let currentOrder = ssAllOrders.length;
-    // and then add it to the orderNumber value within the object.
-
+    // and then add it to the orderNumber field within the object.
     ssAllOrders[ssAllOrders.length - 1].orderNumber = currentOrder;
     // Console.log the order for testing
     console.log(
@@ -139,9 +131,12 @@ function completeMeals() {
   console.log(orderToComplete);
   //if the user chooses to not complete an order: give the choice of either redisplaying incomplete orders OR starting the program again
   if (orderToComplete === 0) {
-    let decision = prompt(
-      'You chose to not mark anything as complete, enter 1 if you would like to add a new order or 2 to see the list of incomplete orders again'
+    let answer = Number(
+      prompt(
+        'You chose to not mark anything as complete, enter 1 if you would like to add a new order or 2 to see the list of incomplete orders again'
+      )
     );
+    //if answer is 1 start the program again
     if (answer === 1) {
       //RECURSION: call the main function and start the entire program from scratch (with the current items still in storage)
       main();
@@ -152,8 +147,8 @@ function completeMeals() {
       //error check the answer - the user didnt enter correctly - start again
       alert('you didnt enter 1 or 2 please refresh the page and try again');
     }
-  } else {
     //if the user chose to mark an order as complete:
+  } else {
     //select the orderArrayItem and mark it as complete(true)
     ssAllOrders[orderToComplete - 1].completionStatus = true;
     //DELETE: display the new array of objects in console for testing
