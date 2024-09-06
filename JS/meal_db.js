@@ -14,7 +14,9 @@ class Order {
 async function getMeal() {
   //DELETE STORE THE LAST ORDER NUMBER
 
-  //write a case for if the order number doesnt exist and the user wants to mark a non existing order as complete
+  //DELETE write a case for if the order number doesnt exist and the user wants to mark a non existing order as complete
+
+  //DELETE check what is actually being stored in session storage on each modal
 
   try {
     // prompt the user for a main ingredient
