@@ -16,6 +16,8 @@ async function getMeal() {
 
   // DELETE ALSO - write a case for if the returned API object is "null" in which case a seemingly valid name was entered but they dont have it in the DBase
 
+  //DELETE add if null statement for all prompt boxes, return null for function and then return null for main function
+
   //DELETE STORE THE LAST ORDER NUMBER
 
   try {
