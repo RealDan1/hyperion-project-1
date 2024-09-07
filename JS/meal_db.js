@@ -137,7 +137,7 @@ function completeMeals() {
   if (orderToComplete === 0) {
     let answer = Number(
       prompt(
-        'You chose to not mark anything as complete, enter 1 if you would like to add a new order or 2 to see the list of incomplete orders again'
+        'You chose to not mark anything as complete.\n Please Enter:\n 1 if you would like to add a new order\nOr\n2 to see the list of incomplete orders again'
       )
     );
     //if answer is 1 start the program again
