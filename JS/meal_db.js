@@ -67,7 +67,7 @@ async function getMeal() {
   }
 }
 
-// Create function to set an item as the order and then initiate the order
+// Create function to set an item as the order(meal is argument) and then initiate the order
 // =====================================================
 function setOrder(meal) {
   // Create an allOrders array to store all orders as an array of Meal objects.
@@ -175,11 +175,10 @@ async function main() {
     setOrder(meal);
     // Then display the current meals - next part of activity
     completeMeals();
-    //tell the user the program will now restart
-    alert('Program complete: returning to create new order');
-    //RECURSION: start the program over again (call the main() function) - and choose a new order
-    //(saves the user the trouble of having to press refresh to start the process again)
-    main();
+
+    // I initially used recursion here on main(), but found I can't access dev tools on the page if I have an endless loop of Prompt dialogs, so I switched it off(thus its commented out).
+    // main();
+    // The user can simply press refresh if they want to restart.
   } catch (error) {
     console.error(error);
   }
