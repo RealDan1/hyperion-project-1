@@ -176,9 +176,7 @@ async function main() {
     // Then display the current meals - next part of activity
     completeMeals();
     //tell the user the program will now restart
-    alert(
-      'you have successfully run the program, the program will now restart for the next order'
-    );
+    alert('Program complete: returning to create new order');
     //RECURSION: start the program over again (call the main() function) - and choose a new order
     //(saves the user the trouble of having to press refresh to start the process again)
     main();
