@@ -14,8 +14,6 @@ class Order {
 async function getMeal() {
   //DELETE STORE THE LAST ORDER NUMBER
 
-  //DELETE write a case for if the order number doesnt exist and the user wants to mark a non existing order as complete
-
   //DELETE check what is actually being stored in session storage on each modal
 
   try {
@@ -85,13 +83,10 @@ function setOrder(meal) {
     // overwrite the previous sessionstorage allOrders array with the latest array
     sessionStorage.setItem(`allOrders`, JSON.stringify(ssAllOrders));
     //set the last ordernumber as the latest order in session storage (overwrite any previous value)
-    //POTENTIAL BUG: orderNumber in sessionStorage could be the wrong number
-
     sessionStorage.setItem(`currentOrder`, JSON.stringify(currentOrder));
     //console.log currentOrderBumber
   } else {
     // Else add the meal to the first place in the array:
-
     allOrders.push(meal);
     // and save the array to sessionStorage for the first time:
     sessionStorage.setItem(`allOrders`, JSON.stringify(allOrders));
@@ -100,7 +95,7 @@ function setOrder(meal) {
   }
 }
 
-// Create the confirm meal as complete or incomplete function
+// Create a function to set a meal as complete or incomplete
 function completeMeals() {
   //pull the sessionStorage array of all orders - prefix is ss
   let ssAllOrders = JSON.parse(sessionStorage.getItem('allOrders'));
@@ -119,36 +114,35 @@ function completeMeals() {
         displayIncompleteOrders
     )
   );
-  //if the order number doesnt exist:
+  // if the order number is outside the length of the array and is thus an invalid order number:
   if (orderToComplete > ssAllOrders.length && orderToComplete > 1) {
     alert('you did not enter a valid order number (or zero) please try again:');
     //RECURSION: call completeMeals() again since the user entered the wrong value
     completeMeals();
   }
+
+  // If the user chooses to not complete an order: give the choice of either redisplaying incomplete orders OR starting the program again
   if (orderToComplete === 0) {
-    //if the user chooses to not complete an order: give the choice of either redisplaying incomplete orders OR starting the program again
-    let answer = Number(
-      prompt(
-        'You chose to not mark anything as complete.\n Please Enter:\n 1 if you would like to add a new order\nOr\n2 to see the list of incomplete orders again'
-      )
+    alert(
+      'You chose to not mark anything as complete.\n The program will now end'
     );
-    //if answer is 1 start the program again
-    if (answer === 1) {
-      //RECURSION: call the main function and start the entire program from scratch (with the current items still in storage)
-      main();
-    } else if (answer === 2) {
-      //RECURSION: call the completeMeals() function again, to just display incomplete meals
-      completeMeals();
-    } else {
-      //error check the answer - the user didnt enter correctly - start again
-      alert('you didnt enter 1 or 2 please refresh the page and try again');
-    }
-    //if the user chose to mark an order as complete:
+    // end the program, the user can just refresh if they want to go again
+    return;
+    // if the user chose to mark an order as complete:
   } else {
-    //select the orderArrayItem and mark it as complete(true)
-    ssAllOrders[orderToComplete - 1].completionStatus = true;
-    //store the modified ssAllOrders array in sessionStorage
-    sessionStorage.setItem(`allOrders`, JSON.stringify(ssAllOrders));
+    // mark the order as active
+    // check if the order is already marked as active(i.e. the order is false)
+    if (!ssAllOrders[orderToComplete - 1].completionStatus) {
+      // select the orderArrayItem and mark it as complete(true)
+      ssAllOrders[orderToComplete - 1].completionStatus = true;
+      // store the modified ssAllOrders array in sessionStorage
+      sessionStorage.setItem(`allOrders`, JSON.stringify(ssAllOrders));
+    } else {
+      // the item has already been marked as complete, end the program and ask to refresh
+      alert(
+        'you have already marked this item as complete, please refresh and try again'
+      );
+    }
   }
 }
 
@@ -174,5 +168,3 @@ async function main() {
 // Initiate the main function chain
 // =====================================================
 main();
-
-//BUG: function still stores null as order item into array
