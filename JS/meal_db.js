@@ -55,9 +55,6 @@ async function getMeal() {
         1,
         false
       );
-      //DELETE - log the meal to console for testing
-      console.log('initiated API call to get meal, the meal is:');
-      console.log(meal);
       // Return the newly created meal object for further processing
       return meal;
     }
@@ -85,11 +82,6 @@ function setOrder(meal) {
     let currentOrder = ssAllOrders.length;
     // and then add it to the orderNumber field within the object.
     ssAllOrders[ssAllOrders.length - 1].orderNumber = currentOrder;
-    // Console.log the order for testing
-    console.log(
-      'Overwriting the array now with a NEWLY ADDED item, the new array is:'
-    );
-    console.log(ssAllOrders);
     // overwrite the previous sessionstorage allOrders array with the latest array
     sessionStorage.setItem(`allOrders`, JSON.stringify(ssAllOrders));
     //set the last ordernumber as the latest order in session storage (overwrite any previous value)
@@ -103,11 +95,8 @@ function setOrder(meal) {
     allOrders.push(meal);
     // and save the array to sessionStorage for the first time:
     sessionStorage.setItem(`allOrders`, JSON.stringify(allOrders));
-    // Console.log the array for testing
-    console.log(
-      'Added the first new order to allOrders array and stored it for the first time. The array contains:'
-    );
-    console.log(allOrders);
+    //it is still the first order of this page load, so store the current order number as 1
+    sessionStorage.setItem(`currentOrder`, 1);
   }
 }
 
@@ -130,11 +119,14 @@ function completeMeals() {
         displayIncompleteOrders
     )
   );
-  //DELETE console.log the answer for testing
-  console.log('the order you want to complete is now:');
-  console.log(orderToComplete);
-  //if the user chooses to not complete an order: give the choice of either redisplaying incomplete orders OR starting the program again
+  //if the order number doesnt exist:
+  if (orderToComplete > ssAllOrders.length && orderToComplete > 1) {
+    alert('you did not enter a valid order number (or zero) please try again:');
+    //RECURSION: call completeMeals() again since the user entered the wrong value
+    completeMeals();
+  }
   if (orderToComplete === 0) {
+    //if the user chooses to not complete an order: give the choice of either redisplaying incomplete orders OR starting the program again
     let answer = Number(
       prompt(
         'You chose to not mark anything as complete.\n Please Enter:\n 1 if you would like to add a new order\nOr\n2 to see the list of incomplete orders again'
@@ -155,11 +147,6 @@ function completeMeals() {
   } else {
     //select the orderArrayItem and mark it as complete(true)
     ssAllOrders[orderToComplete - 1].completionStatus = true;
-    //DELETE: display the new array of objects in console for testing
-    console.log(
-      'Overwriting the array now with a MODIFIED COMPLETIONSTATUS item, the new array is:'
-    );
-    console.log(JSON.stringify(ssAllOrders));
     //store the modified ssAllOrders array in sessionStorage
     sessionStorage.setItem(`allOrders`, JSON.stringify(ssAllOrders));
   }
