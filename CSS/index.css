@@ -9,9 +9,9 @@ body {
   min-height: 100vh;
 }
 
-* {
+/* * {
   border: 1px solid red;
-}
+} */
 
 .hero {
   background-color: #1f2937;
@@ -94,7 +94,7 @@ h2 {
 }
 
 #social-text {
-  margin-right: 50px;
+  margin-right: auto;
 }
 
 #linkedin {
@@ -104,6 +104,7 @@ h2 {
   /* width: 100px; */
   max-width: fit-content;
   max-height: fit-content;
+  margin: auto 0px auto 20px;
 }
 .content-wrapper {
   display: flex;
@@ -176,6 +177,12 @@ h2 {
 
 .btn:hover {
   background-color: #2563eb;
+  cursor: pointer;
+}
+
+button:hover {
+  cursor: pointer;
+  background-color: #3679e6;
 }
 
 footer {
@@ -206,5 +213,17 @@ footer {
 
   nav ul li {
     margin: 0.5rem;
+  }
+
+  .social-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-width: 0px;
+  }
+
+  #social-text {
+    margin-right: 0px;
+    text-align: center;
   }
 }
