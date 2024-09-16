@@ -97,6 +97,7 @@ h2 {
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
+/* Hover effects for cards */
 .service-item:hover,
 .skill-item:hover,
 .portfolio-item:hover {
@@ -126,6 +127,7 @@ h2 {
   transition: background-color 0.3s ease, color 0.3s ease;
 }
 
+/* button hover effects */
 #linkedin:hover {
   background-color: #ecf0f1;
   color: #3498db;
@@ -188,6 +190,7 @@ footer {
   margin-top: auto;
 }
 
+/* Adaptive sizing styles */
 @media (max-width: 768px) {
   .content-wrapper,
   .image-about-text {
