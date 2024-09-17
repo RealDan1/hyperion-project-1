@@ -63,7 +63,6 @@ h2 {
   background-color: #f9f9f9;
 }
 .services-grid,
-.skills-grid,
 .portfolio-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
@@ -72,7 +71,6 @@ h2 {
   margin: 0 auto;
 }
 .service-item,
-.skill-item,
 .portfolio-item,
 .education-item {
   background-color: #fff;
@@ -83,7 +81,6 @@ h2 {
 }
 /* Hover effects for cards - learnt from The Odin Project*/
 .service-item:hover,
-.skill-item:hover,
 .portfolio-item:hover,
 .education-item:hover {
   transform: translateY(-5px);
